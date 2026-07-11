@@ -1,0 +1,8 @@
+Flask
+faiss-cpu
+numpy
+pypdf
+python-dotenv
+requests
+sentence-transformers
+
