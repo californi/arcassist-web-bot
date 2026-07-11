@@ -44,7 +44,3 @@ Open `http://127.0.0.1:5000`.
 For review, do not publish Git history, credentials, local paths, personal
 accounts, or non-anonymized repository links. Replace private corpora with a
 public sample corpus or an evidence manifest.
-
-## Revision markup
-
-The companion article sources use `\bento{...}` to mark internal review changes.
