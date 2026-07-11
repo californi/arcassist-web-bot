@@ -1,8 +1,9 @@
-from typing import Generator, List
+from typing import Generator, List, Optional
 import os
 
 import requests
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -11,29 +12,30 @@ API_URL = os.getenv("GROQ_API_URL", "https://api.groq.com/openai/v1/chat/complet
 MODEL_ID = os.getenv("GROQ_MODEL_ID", "llama-3.1-8b-instant")
 
 
-def montar_prompt(contexto: str, pergunta: str, historico: List[str] = None) -> str:
-    historico_formatado = ""
-    if historico:
-        historico_formatado = "\n".join(historico)
+def build_prompt(context: str, question: str, history: Optional[List[str]] = None) -> str:
+    formatted_history = ""
+    if history:
+        formatted_history = "\n".join(history)
 
-    return f"""Voce e um assistente especializado em Arquitetura de Software.
-Seu objetivo e apoiar arquitetos, desenvolvedores e engenheiros de software a tomarem decisoes tecnicas embasadas.
+    return f"""You are an assistant specialized in software architecture.
+Your goal is to help architects, developers, and software engineers prepare evidence-grounded technical decisions.
 
-Diretrizes:
-- Responda de forma clara, objetiva e tecnica em portugues.
-- Sempre considere trade-offs, incluindo vantagens, desvantagens e riscos.
-- Baseie sua resposta estritamente no contexto fornecido.
-- Se a resposta nao estiver no contexto, diga: "Nao encontrei essa informacao na base de conhecimento fornecida."
-- Nao apresente inferencias como fatos arquiteturais aceitos.
+Guidelines:
+- Answer clearly, concisely, and technically in English.
+- Always consider trade-offs, including benefits, drawbacks, and risks.
+- Base the answer strictly on the provided context.
+- If the answer is not supported by the context, say: "I did not find this information in the provided knowledge base."
+- Do not present inferences as accepted architectural facts.
+- Make assumptions and validation needs explicit.
 
-HISTORICO DA CONVERSA:
-{historico_formatado}
+CONVERSATION HISTORY:
+{formatted_history}
 
-CONTEXTO (BASE DE CONHECIMENTO):
-{contexto}
+CONTEXT:
+{context}
 
-PERGUNTA DO USUARIO:
-{pergunta}"""
+USER QUESTION:
+{question}"""
 
 
 def _headers() -> dict:
@@ -45,8 +47,8 @@ def _headers() -> dict:
     }
 
 
-def gerar_resposta(contexto: str, pergunta: str, historico: List[str] = None) -> str:
-    prompt = montar_prompt(contexto, pergunta, historico)
+def generate_response(context: str, question: str, history: Optional[List[str]] = None) -> str:
+    prompt = build_prompt(context, question, history)
     try:
         response = requests.post(
             API_URL,
@@ -60,10 +62,14 @@ def gerar_resposta(contexto: str, pergunta: str, historico: List[str] = None) ->
         )
         if response.status_code == 200:
             return response.json()["choices"][0]["message"]["content"]
-        return f"Erro na API do modelo: {response.status_code}"
+        return f"Model API error: {response.status_code}"
     except Exception as exc:
-        return f"Erro de conexao: {str(exc)}"
+        return f"Connection error: {str(exc)}"
 
 
-def gerar_resposta_stream(contexto: str, pergunta: str, historico: List[str] = None) -> Generator[str, None, None]:
-    yield gerar_resposta(contexto, pergunta, historico)
+def generate_response_stream(
+    context: str,
+    question: str,
+    history: Optional[List[str]] = None,
+) -> Generator[str, None, None]:
+    yield generate_response(context, question, history)

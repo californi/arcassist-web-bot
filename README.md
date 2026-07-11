@@ -1,8 +1,8 @@
 # ArcAssist-Web Bot
 
-Prototype artifact for the WBOTS 2026 short paper.
+Prototype artifact for the WBOTS 2026 paper.
 
-The bot is an early Flask-based demonstrator for evidence-grounded architectural
+The bot is an early Flask demonstrator for evidence-grounded architectural
 decision support. It receives a software-architecture concern, retrieves context
 from a local knowledge base, builds a constrained prompt, and asks an external
 LLM service to draft review material.
@@ -14,8 +14,8 @@ LLM service to draft review material.
 - `rag/vectorstore.py`: PDF/text ingestion, chunking, embeddings, FAISS index.
 - `rag/llm.py`: sanitized LLM adapter using environment variables.
 - `data/architecture_seed.txt`: small seed knowledge base for smoke testing.
-- `documentos/README.md`: manifest for architecture PDFs used in the original
-  local prototype.
+- `documents/README.md`: evidence manifest guidance for redistributable
+  architecture documents.
 
 Derived files such as `rag/index.faiss` and `rag/docs.npy` are intentionally
 excluded. They are rebuilt automatically when the app starts.
@@ -43,5 +43,8 @@ Open `http://127.0.0.1:5000`.
 
 For review, do not publish Git history, credentials, local paths, personal
 accounts, or non-anonymized repository links. Replace private corpora with a
-public sample corpus or a manifest.
+public sample corpus or an evidence manifest.
 
+## Revision markup
+
+The companion article sources use `\bento{...}` to mark internal review changes.
