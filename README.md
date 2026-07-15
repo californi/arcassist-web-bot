@@ -1,4 +1,4 @@
-# ArcAssist-Web Bot
+# ArcAssist-Web Bot -- https://arcassist-decision-buddy.lovable.app/
 
 Prototype artifact for the WBOTS 2026 paper.
 
