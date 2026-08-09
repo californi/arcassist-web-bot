@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the accompanying WBOTS 2026 paper."
+title: "ArcAssist-Web Bot"
+type: software
+version: "1.0.0-camera-ready"
+date-released: 2026-08-09
+authors:
+  - family-names: "Rodrigues de Oliveira"
+    given-names: "Vanusa"
+    affiliation: "Federal University of Lavras"
+  - family-names: "Siqueira"
+    given-names: "Bento Rafael"
+    affiliation: "Federal University of Lavras"
+  - family-names: "Santos da Silva"
+    given-names: "Samira"
+    affiliation: "Federal University of Lavras"
+keywords:
+  - "software engineering bots"
+  - "software architecture"
+  - "retrieval-augmented generation"
+  - "architectural decision support"
+  - "LLM"
+url: "https://arcassist-decision-buddy.lovable.app/"
+abstract: >-
+  Early Web-system prototype for evidence-grounded architectural decision
+  preparation. The implemented Flask/RAG path retrieves architecture evidence,
+  constructs a constrained prompt, and requests draft review material from an
+  external LLM service. Decision acceptance remains a human activity.

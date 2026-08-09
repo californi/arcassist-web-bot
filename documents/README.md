@@ -1,20 +1,29 @@
 # Evidence Documents
 
-Place redistributable architecture documents in this directory when preparing a
-public artifact. The prototype will ingest `*.pdf` files from this folder and
-combine them with the seed corpus in `data/architecture_seed.txt`.
+This directory is reserved for **redistributable architecture evidence** used by the prototype. At startup, ArcAssist-Web Bot ingests `*.pdf` files from this directory and combines them with the sanitized seed corpus in `data/architecture_seed.txt`.
 
-For a reviewable artifact, each source should be registered in an evidence
-manifest with at least:
+No private or non-redistributable project documents are included in the camera-ready package.
 
-- source identifier;
+## Recommended evidence manifest
+
+For future public corpora, register each source in an evidence manifest with at least:
+
+- stable source identifier;
 - title;
 - origin or URL;
-- version or access date;
+- version and/or access date;
 - license;
 - redistribution status;
-- notes about whether the source represents implemented facts, planned concepts,
-  or open questions.
+- document type (e.g., ADR, diagram description, backlog item, API contract, deployment constraint, privacy policy, quality scenario);
+- whether the source represents implemented facts, planned concepts, or open questions.
 
-Derived files such as `rag/index.faiss` and `rag/docs.npy` should not be
-committed. Delete them before rebuilding the corpus or publishing the package.
+The current implementation retrieves text chunks but does **not** yet propagate stable document/page/section/timestamp/corpus-version metadata into the generated answer. This is a limitation described in the accompanying WBOTS 2026 paper.
+
+## Rebuilding the index
+
+The generated files below should not be distributed:
+
+- `rag/index.faiss`
+- `rag/docs.npy`
+
+Delete them after changing the corpus; the next startup or smoke test will rebuild the index from the available seed/PDF content.
