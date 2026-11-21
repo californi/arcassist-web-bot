@@ -25,6 +25,12 @@ This package reflects the scope claimed in the camera-ready paper. It supports i
 
 The current prototype **does not implement** the planned Validation and QA or Knowledge Management responsibilities. It also does not autonomously accept architectural decisions. The Decision Package and Architect Review gate described in the paper delimit the planned workflow beyond the implemented RAG slice.
 
+## Relationship to the broader ArcAssist product
+
+This public repository is the article-specific WBOTS 2026 research artifact, identified as version `1.0.0-camera-ready` at commit `354d4dc90374f10a77ba899994a2308f3d518fab`. Its scope is the early, limited prototype described above. It is not the full or base ArcAssist product and does not contain that separate product's broader feature set. The full/base software is maintained separately as a distinct intellectual-property asset; this repository does not include or grant rights to that separate software.
+
+Implementation details and model-provider behavior described in this README apply only to this article-specific artifact. They do not describe other ArcAssist versions. This clarification does not grant a license to this repository or determine authorship, ownership, or registration status; see the licensing note below.
+
 ## Package contents
 
 - `app.py` — Flask Web application and `/ask` route.
